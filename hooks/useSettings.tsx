@@ -22,7 +22,14 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem('quran-settings');
     if (saved) {
-      setSettings(JSON.parse(saved));
+      try {
+        const parsed = JSON.parse(saved);
+        setSettings(parsed);
+      } catch (e) {
+        setSettings(defaultSettings);
+      }
+    } else {
+      setSettings(defaultSettings);
     }
     setIsLoaded(true);
   }, []);
@@ -30,11 +37,16 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem('quran-settings', JSON.stringify(settings));
+      
       // Apply theme
-      if (settings.theme === 'dark') {
-        document.documentElement.classList.add('dark');
+      const root = document.documentElement;
+      root.classList.remove('light', 'dark', 'sepia');
+      
+      if (settings.theme === 'system') {
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        root.classList.add(systemTheme);
       } else {
-        document.documentElement.classList.remove('dark');
+        root.classList.add(settings.theme);
       }
     }
   }, [settings, isLoaded]);

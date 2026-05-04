@@ -15,13 +15,16 @@ export const metadata: Metadata = {
   description: "A premium Quran reading experience with translation and audio",
 };
 
+import { AudioProvider } from "@/hooks/useAudio";
+import GlobalPlayer from "@/components/GlobalPlayer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -29,17 +32,20 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <SettingsProvider>
-          <ThemeWrapper>
-            <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden">
-              <Header />
-              <div className="flex-1 flex overflow-hidden">
-                {children}
-                <RightSidebar />
+          <AudioProvider>
+            <ThemeWrapper>
+              <Sidebar />
+              <div className="flex-1 flex flex-col overflow-hidden">
+                <Header />
+                <div className="flex-1 flex overflow-hidden">
+                  {children}
+                  <RightSidebar />
+                </div>
               </div>
-            </div>
-            <MobileNav />
-          </ThemeWrapper>
+              <MobileNav />
+              <GlobalPlayer />
+            </ThemeWrapper>
+          </AudioProvider>
         </SettingsProvider>
       </body>
     </html>

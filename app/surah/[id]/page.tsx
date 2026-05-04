@@ -1,7 +1,6 @@
 import React from 'react';
 import { getSurahAyahs, getSurahs } from '@/lib/quran';
-import AyahCard from '@/components/AyahCard';
-import SurahHeader from '@/components/SurahHeader';
+import SurahPageClient from '@/components/SurahPageClient';
 
 export async function generateStaticParams() {
   const surahs = await getSurahs();
@@ -18,26 +17,10 @@ export default async function SurahPage({ params }: { params: Promise<{ id: stri
   const surah = surahs.find(s => s.id === surahId);
 
   return (
-    <div className="flex-1 overflow-y-auto custom-scrollbar bg-background">
-      <div className="mx-auto">
-        {/* Surah Header Component (Client Component) */}
-        <SurahHeader surah={surah} surahId={surahId} />
-
-
-
-
-          {/* Ayahs List */}
-          <div className="flex flex-col">
-            {ayahs.map((ayah) => (
-              <AyahCard key={`${ayah.surah}-${ayah.verse}`} ayah={ayah} />
-            ))}
-          </div>
-      </div>
-    </div>
+    <SurahPageClient 
+      surah={surah} 
+      surahId={surahId} 
+      ayahs={ayahs.map(a => ({ ...a, surah_name: surah?.transliteration }))} 
+    />
   );
 }
-
-
-
-
-

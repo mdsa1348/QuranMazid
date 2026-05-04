@@ -64,13 +64,13 @@ const SettingsPanel = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
 
         <div>
           <label className="text-sm font-medium text-muted mb-4 block uppercase tracking-wider">Theme</label>
-          <div className="grid grid-cols-3 gap-2">
-            {['light', 'dark', 'sepia'].map((t) => (
+          <div className="grid grid-cols-2 gap-2">
+            {['light', 'dark', 'sepia', 'system'].map((t) => (
               <button
                 key={t}
                 onClick={() => updateSettings({ theme: t as any })}
-                className={`py-2 rounded-lg text-xs capitalize border transition-all ${
-                  settings.theme === t ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted'
+                className={`py-2.5 rounded-xl text-xs font-bold capitalize border transition-all ${
+                  settings.theme === t ? 'bg-primary/10 border-primary/50 text-primary' : 'bg-card border-border text-muted/60'
                 }`}
               >
                 {t}

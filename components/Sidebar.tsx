@@ -32,7 +32,7 @@ const Sidebar = () => {
 const SidebarIcon = ({ icon, active = false }: { icon: React.ReactNode; active?: boolean }) => {
   return (
     <div className={`w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer transition-all duration-200 group ${
-      active ? 'bg-card/40 text-primary border border-border/50' : 'text-[#b0b0b0] hover:text-foreground hover:bg-card/30'
+      active ? 'bg-card text-primary border border-border/50' : 'text-muted hover:text-foreground hover:bg-card/50'
     }`}>
       {icon}
     </div>

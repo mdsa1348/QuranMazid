@@ -13,13 +13,14 @@ export interface Ayah {
   verse: number;
   text: string;
   translation: string;
+  surah_name?: string;
 }
 
 export interface Settings {
   arabicFont: string;
   arabicFontSize: number;
   translationFontSize: number;
-  theme: 'light' | 'dark' | 'sepia';
+  theme: 'light' | 'dark' | 'sepia' | 'system';
 }
 
 export interface Juz {
