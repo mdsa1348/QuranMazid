@@ -13,13 +13,14 @@ const Sidebar = () => {
          </div>
       </Link>
       
-      <div className="flex flex-col gap-5 flex-1">
+      <div className="flex flex-col gap-5 flex-1 justify-center">
         <SidebarIcon icon={<Home size={20} />} active />
         <SidebarIcon icon={<LayoutGrid size={20} />} />
         <SidebarIcon icon={<Send size={20} />} />
         <SidebarIcon icon={<Bookmark size={20} />} />
         <SidebarIcon icon={<LayoutGrid size={20} />} />
       </div>
+
 
       <div className="mt-auto flex flex-col gap-5">
         <SidebarIcon icon={<Settings size={20} />} />
