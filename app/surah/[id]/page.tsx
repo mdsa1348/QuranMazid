@@ -1,7 +1,6 @@
 import React from 'react';
 import { getSurahAyahs, getSurahs } from '@/lib/quran';
 import AyahCard from '@/components/AyahCard';
-import SurahList from '@/components/SurahList';
 import SurahHeader from '@/components/SurahHeader';
 
 export async function generateStaticParams() {
@@ -19,12 +18,11 @@ export default async function SurahPage({ params }: { params: Promise<{ id: stri
   const surah = surahs.find(s => s.id === surahId);
 
   return (
-    <>
-      <SurahList />
-      <div className="flex-1 overflow-y-auto custom-scrollbar bg-background">
-        <div className="mx-auto">
-          {/* Surah Header Component (Client Component) */}
-          <SurahHeader surah={surah} surahId={surahId} />
+    <div className="flex-1 overflow-y-auto custom-scrollbar bg-background">
+      <div className="mx-auto">
+        {/* Surah Header Component (Client Component) */}
+        <SurahHeader surah={surah} surahId={surahId} />
+
 
 
 

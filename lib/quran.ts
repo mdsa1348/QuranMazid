@@ -1,10 +1,12 @@
 import { Surah, Ayah } from './types';
+import { cache } from 'react';
 
 const API_BASE = 'https://api.quran.com/api/v4';
 
-export async function getSurahs(): Promise<Surah[]> {
-  const res = await fetch(`${API_BASE}/chapters?language=en`);
+export const getSurahs = cache(async (): Promise<Surah[]> => {
+  const res = await fetch(`${API_BASE}/chapters?language=en`, { next: { revalidate: 3600 } });
   const data = await res.json();
+
   
   return data.chapters.map((c: any) => ({
     id: c.id,
@@ -16,11 +18,12 @@ export async function getSurahs(): Promise<Surah[]> {
   }));
 }
 
-export async function getSurahAyahs(surahId: number): Promise<Ayah[]> {
+export const getSurahAyahs = cache(async (surahId: number): Promise<Ayah[]> => {
   const [araRes, engRes] = await Promise.all([
-    fetch(`${API_BASE}/quran/verses/uthmani?chapter_number=${surahId}`),
-    fetch(`${API_BASE}/quran/translations/20?chapter_number=${surahId}`)
+    fetch(`${API_BASE}/quran/verses/uthmani?chapter_number=${surahId}`, { next: { revalidate: 3600 } }),
+    fetch(`${API_BASE}/quran/translations/20?chapter_number=${surahId}`, { next: { revalidate: 3600 } })
   ]);
+
 
   const araData = await araRes.json();
   const engData = await engRes.json();
