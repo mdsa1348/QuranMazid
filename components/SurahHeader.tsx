@@ -23,11 +23,12 @@ const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
     <div className="relative h-[150px] flex items-center px-12 border-b border-border/10 bg-[#0a0a0a] overflow-hidden">
       {/* Left: Revelation Image */}
       <div className="flex-1 flex items-center h-full">
-        <div className="opacity-[0.12] transform scale-125 origin-left pointer-events-none grayscale brightness-[2]">
+        <div className="opacity-[0.15] transform scale-125 origin-left pointer-events-none">
            <img 
               src={headerImg} 
               alt="" 
-              className="h-28 object-contain"
+              className="h-28 object-contain invert brightness-200"
+
 
               onError={(e) => {
                 // Fallback if the URL fails
