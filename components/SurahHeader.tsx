@@ -13,8 +13,8 @@ const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
   
   // Use more robust URLs for the silhouettes
   const headerImg = isMeccan 
-    ? "https://quranmazid.com/assets/images/header_bg.png" 
-    : "https://quranmazid.com/assets/images/madina.png";
+    ? "https://quranmazid.com/assets/images/makkah.png" 
+    : "https://quranmazid.com/assets/images/madinah.png";
 
   const bismillahSvg = "https://quranmazid.com/_next/static/media/bismillah.2a2f3d14.svg";
 
@@ -22,20 +22,21 @@ const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
     <div className="relative h-[150px] flex items-center px-12 border-b border-border/10 bg-[#0a0a0a] overflow-hidden">
       {/* Left: Revelation Image */}
       <div className="flex-1 flex items-center h-full">
-        <div className="opacity-[0.15] grayscale brightness-[2.5] transform scale-125 origin-left">
+        <div className="opacity-[0.08] transform scale-125 origin-left pointer-events-none">
            <img 
               src={headerImg} 
               alt="" 
-              className="h-28 object-contain"
+              className="h-28 object-contain invert"
               onError={(e) => {
                 // Fallback if the URL fails
                 (e.target as HTMLImageElement).src = isMeccan 
-                  ? "https://quranmazid.com/assets/images/makkah.png"
+                  ? "https://quranmazid.com/assets/images/header_bg.png"
                   : "https://quranmazid.com/assets/images/madina.png";
               }}
            />
         </div>
       </div>
+
 
       {/* Center: Surah Title */}
       <div className="absolute left-1/2 -translate-x-1/2 text-center z-10 w-max">
