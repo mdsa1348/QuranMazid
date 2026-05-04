@@ -25,11 +25,11 @@ const SurahList = () => {
 
   const filteredSurahs = surahs.filter(s => 
     s.transliteration.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    s.id.toString().includes(searchQuery)
+    s.id.toString() === searchQuery
   );
 
   return (
-    <aside className="hidden lg:flex w-[350px] bg-surah-list border-r border-border flex-col overflow-hidden shrink-0">
+    <aside className="hidden lg:flex w-[350px] bg-[#111111] border-r border-border/50 flex-col overflow-hidden shrink-0">
       <div className="p-5 border-b border-border/50 space-y-5">
         <div className="flex bg-black/40 rounded-xl p-1 border border-border/50">
            {(['surah', 'juz', 'page'] as Mode[]).map((m) => (
@@ -57,25 +57,25 @@ const SurahList = () => {
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto custom-scrollbar p-3">
+      <div className="flex-1 overflow-y-auto custom-scrollbar">
         {mode === 'surah' && filteredSurahs.map((surah) => (
           <Link 
             key={surah.id} 
             href={`/surah/${surah.id}`}
-            className={`flex items-center p-3.5 rounded-xl gap-4 hover:bg-white/5 mb-1.5 transition-all group ${
-              activeId === surah.id ? 'bg-primary/10 border border-primary/20' : 'border border-transparent'
+            className={`flex items-center py-5 px-5 gap-4 hover:bg-white/5 transition-all group border-b border-border/20 ${
+              activeId === surah.id ? 'bg-[#1a1a1a] border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'
             }`}
           >
-            <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-xs font-bold transition-all ${
+            <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold transition-all ${
               activeId === surah.id ? 'bg-primary text-white' : 'bg-black/20 border border-border/50 text-muted group-hover:border-primary/30'
             }`}>
               {surah.id}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className={`text-[13px] font-bold truncate ${activeId === surah.id ? 'text-primary' : 'text-foreground'}`}>
+              <h3 className={`text-[16px] font-semibold truncate ${activeId === surah.id ? 'text-primary' : 'text-foreground'}`}>
                 {surah.transliteration}
               </h3>
-              <p className="text-[10px] text-muted truncate font-medium">{surah.translation}</p>
+              <p className="text-[13px] text-[#b0b0b0] truncate font-medium">{surah.translation}</p>
             </div>
             <div className="text-right">
               <div className="text-sm font-bold arabic-font text-foreground/90">{surah.name}</div>
@@ -95,4 +95,3 @@ const SurahList = () => {
 };
 
 export default SurahList;
-

@@ -32,13 +32,13 @@ const Header = () => {
   return (
     <header className="h-[80px] border-b border-border bg-sidebar flex items-center justify-between px-10 z-40 sticky top-0 shrink-0">
       <div className="flex flex-col">
-        <h1 className="text-xl font-black text-foreground tracking-tight leading-none">Quran Mazid</h1>
-        <p className="text-[10px] text-muted/60 font-bold mt-1.5 uppercase tracking-wider">Read, Study, and Learn The Quran</p>
+        <h1 className="text-[22px] font-bold text-foreground tracking-tight leading-none">Quran Mazid</h1>
+        <p className="text-[11px] text-[#b0b0b0] font-medium mt-1.5 uppercase tracking-wider">Read, Study, and Learn The Quran</p>
       </div>
 
       <div className="flex items-center gap-8">
         <div className="relative group hidden lg:block">
-           <div className="flex items-center bg-black/20 border border-border/50 px-5 py-3 rounded-2xl gap-3.5 w-[500px] text-muted focus-within:border-primary/40 focus-within:ring-4 focus-within:ring-primary/5 transition-all">
+           <div className="flex items-center bg-[#1a1a1a] border border-border/50 px-5 py-3 rounded-full gap-3.5 w-[500px] text-muted focus-within:border-primary/40 focus-within:ring-4 focus-within:ring-primary/5 transition-all">
               <Search size={18} className="text-muted/40" />
               <input 
                 type="text" 
@@ -99,4 +99,5 @@ const Header = () => {
 };
 
 export default Header;
+
 
