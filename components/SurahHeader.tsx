@@ -9,7 +9,8 @@ interface SurahHeaderProps {
 }
 
 const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
-  const isMeccan = surah?.type?.toLowerCase() === 'meccan';
+  const isMeccan = surah?.type?.toLowerCase() === 'makkah';
+
   
   // Exact URLs provided by the user for pinpoint accuracy
   const headerImg = isMeccan 
