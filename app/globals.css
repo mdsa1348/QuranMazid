@@ -10,6 +10,15 @@
 }
 
 :root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --sidebar: #0a0a0a;
+  --surah-list: #111111;
+  --card: #121212;
+  --border: #1a1a1a;
+}
+
+.light {
   --background: #ffffff;
   --foreground: #000000;
   --sidebar: #fcfcfc;
@@ -18,14 +27,6 @@
   --border: #e5e7eb;
 }
 
-.dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --sidebar: #0a0a0a;
-  --surah-list: #111111;
-  --card: #121212;
-  --border: #1a1a1a;
-}
 
 .sepia {
   --background: #f4ecd8;
@@ -36,12 +37,17 @@
   --border: #e2d1b3;
 }
 
+html {
+  background-color: #000000;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
+
 
 .arabic-font {
   font-family: 'Scheherazade New', serif;
