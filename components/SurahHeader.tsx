@@ -23,11 +23,11 @@ const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
     <div className="relative h-[150px] flex items-center px-12 border-b border-border/10 bg-[#0a0a0a] overflow-hidden">
       {/* Left: Revelation Image */}
       <div className="flex-1 flex items-center h-full">
-        <div className="opacity-[0.15] transform scale-125 origin-left pointer-events-none">
+        <div className="opacity-[0.4] transform scale-125 origin-left pointer-events-none">
            <img 
               src={headerImg} 
               alt="" 
-              className="h-28 object-contain invert brightness-200"
+              className="h-32 object-contain invert brightness-[300%]"
 
 
               onError={(e) => {
@@ -54,12 +54,12 @@ const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
       {/* Right: Bismillah SVG */}
       <div className="flex-1 flex justify-end items-center z-10">
         {surahId !== 1 && surahId !== 9 && (
-          <div className="opacity-60 brightness-200 contrast-125 hover:opacity-90 transition-opacity">
+          <div className="opacity-95 brightness-[500%] contrast-[200%] hover:opacity-100 transition-opacity">
             <img 
               src={bismillahSvg} 
               alt="Bismillah" 
               className="h-8 md:h-10 object-contain"
-              style={{ filter: 'brightness(0) invert(1) opacity(0.8)' }}
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </div>
         )}
