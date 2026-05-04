@@ -57,35 +57,46 @@ const SurahList = () => {
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto custom-scrollbar">
+      <div className="flex-1 overflow-y-auto custom-scrollbar p-5 space-y-3">
         {mode === 'surah' && filteredSurahs.map((surah) => {
           const displayName = surah.transliteration.replace(/-/g, ' ');
           return (
             <Link 
               key={surah.id} 
               href={`/surah/${surah.id}`}
-              className={`flex items-center py-2.5 px-5 gap-4 hover:bg-white/5 transition-all group border-b border-white/[0.03] ${
-                activeId === surah.id ? 'bg-[#1a1a1a] border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'
+              className={`flex items-center p-4 rounded-2xl border transition-all group ${
+                activeId === surah.id 
+                  ? 'bg-primary/5 border-primary/40 shadow-lg shadow-primary/5' 
+                  : 'bg-black/20 border-border/30 hover:border-primary/20 hover:bg-black/30'
               }`}
             >
-              <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[11px] font-black transition-all shrink-0 ${
-                activeId === surah.id ? 'bg-primary text-white' : 'bg-black/40 border border-border/30 text-[#666666] group-hover:border-primary/30'
-              }`}>
-                {surah.id}
+              {/* Diamond ID */}
+              <div className="mr-6 relative">
+                <div className={`w-9 h-9 rotate-45 rounded-lg flex items-center justify-center transition-all ${
+                  activeId === surah.id ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-white/5 border border-border/30'
+                }`}>
+                  <span className={`-rotate-45 text-[12px] font-black ${activeId === surah.id ? 'text-white' : 'text-muted/60'}`}>
+                    {surah.id}
+                  </span>
+                </div>
               </div>
+
+              {/* Text Info */}
               <div className="flex-1 min-w-0">
-                <h3 className={`text-[14px] font-bold truncate leading-tight ${activeId === surah.id ? 'text-primary' : 'text-foreground/90'}`}>
+                <h3 className={`text-[15px] font-bold truncate leading-tight ${activeId === surah.id ? 'text-primary' : 'text-foreground/90'}`}>
                   {displayName}
                 </h3>
-                <p className="text-[11px] text-[#b0b0b0]/50 truncate font-medium mt-0.5">{surah.translation}</p>
+                <p className="text-[12px] text-muted/50 truncate font-medium mt-1">{surah.translation}</p>
               </div>
+
+              {/* Arabic Name */}
               <div className="text-right shrink-0">
-                <div className="text-[14px] font-bold arabic-font text-foreground/80 leading-tight">{surah.name}</div>
-                <p className="text-[8px] text-muted/30 uppercase font-bold tracking-widest mt-0.5">{surah.total_verses} AYAH</p>
+                <div className="text-[16px] font-bold arabic-font text-foreground/80 leading-tight">{surah.name}</div>
               </div>
             </Link>
           );
         })}
+
 
 
 
