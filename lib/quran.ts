@@ -15,8 +15,8 @@ export const getSurahs = cache(async (): Promise<Surah[]> => {
     translation: c.translated_name.name,
     type: c.revelation_place,
     total_verses: c.verses_count,
-  }));
-}
+  });
+});
 
 export const getSurahAyahs = cache(async (surahId: number): Promise<Ayah[]> => {
   const [araRes, engRes] = await Promise.all([
@@ -41,7 +41,8 @@ export const getSurahAyahs = cache(async (surahId: number): Promise<Ayah[]> => {
       translation: translation.replace(/<[^>]*>?/gm, '') // Remove HTML tags
     };
   });
-}
+});
+
 
 export async function searchAyahs(query: string): Promise<Ayah[]> {
   const res = await fetch(`${API_BASE}/search?q=${query}&size=20&page=1`);
