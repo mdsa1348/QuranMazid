@@ -1,37 +1,60 @@
 import { Surah, Ayah } from './types';
 
-const BASE_URL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions';
+const API_BASE = 'https://api.quran.com/api/v4';
 
 export async function getSurahs(): Promise<Surah[]> {
-  const res = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/chapters.json');
+  const res = await fetch(`${API_BASE}/chapters?language=en`);
   const data = await res.json();
-  return data.chapters;
+  
+  return data.chapters.map((c: any) => ({
+    id: c.id,
+    name: c.name_arabic,
+    transliteration: c.name_simple,
+    translation: c.translated_name.name,
+    type: c.revelation_place,
+    total_verses: c.verses_count,
+  }));
 }
 
 export async function getSurahAyahs(surahId: number): Promise<Ayah[]> {
-  // We need to fetch both Arabic text and English translation
-  // The API structure for ayahs is: editions/{edition}/{surah}/{verse}.json
-  // Or editions/{edition}/{surah}.json for the whole surah
-  
   const [araRes, engRes] = await Promise.all([
-    fetch(`${BASE_URL}/ara-quranmanual/${surahId}.json`),
-    fetch(`${BASE_URL}/eng-translation/${surahId}.json`)
+    fetch(`${API_BASE}/quran/verses/uthmani?chapter_number=${surahId}`),
+    fetch(`${API_BASE}/quran/translations/20?chapter_number=${surahId}`)
   ]);
 
   const araData = await araRes.json();
   const engData = await engRes.json();
 
-  return araData.verses.map((v: any, index: number) => ({
-    id: index + 1,
-    surah: surahId,
-    verse: v.verse,
-    text: v.text,
-    translation: engData.verses[index].text
-  }));
+  const araVerses = araData?.verses || [];
+  const engTranslations = engData?.translations || [];
+
+  return araVerses.map((v: any, index: number) => {
+    const translation = engTranslations[index]?.text || '';
+    return {
+      id: index + 1,
+      surah: surahId,
+      verse: v.verse_key?.split(':')[1] || (index + 1).toString(),
+      text: v.text_uthmani || '',
+      translation: translation.replace(/<[^>]*>?/gm, '') // Remove HTML tags
+    };
+  });
 }
 
 export async function searchAyahs(query: string): Promise<Ayah[]> {
-  // This is tricky without a real DB. For a clone, we can fetch all or search a specific file.
-  // For now, let's keep it simple or implement it later.
-  return [];
+  const res = await fetch(`${API_BASE}/search?q=${query}&size=20&page=1`);
+  const data = await res.json();
+  
+  return (data?.search?.results || []).map((r: any) => ({
+    id: r.verse_id,
+    surah: parseInt(r.verse_key.split(':')[0]),
+    verse: r.verse_key.split(':')[1],
+    text: r.text, // This is usually snippets with <em> tags
+    translation: r.translations?.[0]?.text?.replace(/<[^>]*>?/gm, '') || ''
+  }));
+}
+
+export async function getJuzs() {
+  const res = await fetch(`${API_BASE}/juzs`);
+  const data = await res.json();
+  return data.juzs;
 }
