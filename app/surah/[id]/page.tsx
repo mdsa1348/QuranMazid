@@ -32,11 +32,11 @@ export default async function SurahPage({ params }: { params: Promise<{ id: stri
               <AyahCard key={`${ayah.surah}-${ayah.verse}`} ayah={ayah} />
             ))}
           </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 }
+
 
 
 
