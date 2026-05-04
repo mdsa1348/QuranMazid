@@ -62,27 +62,28 @@ const SurahList = () => {
           <Link 
             key={surah.id} 
             href={`/surah/${surah.id}`}
-            className={`flex items-center py-3.5 px-5 gap-4 hover:bg-white/5 transition-all group border-b border-border/10 ${
+            className={`flex items-center py-2 px-5 gap-3.5 hover:bg-white/5 transition-all group border-b border-border/5 ${
               activeId === surah.id ? 'bg-[#1a1a1a] border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'
             }`}
           >
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-black transition-all ${
+            <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-black transition-all shrink-0 ${
               activeId === surah.id ? 'bg-primary text-white' : 'bg-black/20 border border-border/30 text-muted group-hover:border-primary/30'
             }`}>
               {surah.id}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className={`text-[14px] font-bold truncate ${activeId === surah.id ? 'text-primary' : 'text-foreground'}`}>
+              <h3 className={`text-[13px] font-bold truncate leading-tight ${activeId === surah.id ? 'text-primary' : 'text-foreground'}`}>
                 {surah.transliteration}
               </h3>
-              <p className="text-[11px] text-[#b0b0b0]/60 truncate font-medium">{surah.translation}</p>
+              <p className="text-[10px] text-[#b0b0b0]/50 truncate font-medium">{surah.translation}</p>
             </div>
-            <div className="text-right">
-              <div className="text-[14px] font-bold arabic-font text-foreground/90">{surah.name}</div>
-              <p className="text-[9px] text-muted/50 uppercase font-bold tracking-wider">{surah.total_verses} Ayah</p>
+            <div className="text-right shrink-0">
+              <div className="text-[13px] font-bold arabic-font text-foreground/90 leading-tight">{surah.name}</div>
+              <p className="text-[8px] text-muted/40 uppercase font-bold tracking-wider">{surah.total_verses} Ayah</p>
             </div>
           </Link>
         ))}
+
 
 
         {mode !== 'surah' && (
