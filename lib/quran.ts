@@ -15,8 +15,9 @@ export const getSurahs = cache(async (): Promise<Surah[]> => {
     translation: c.translated_name.name,
     type: c.revelation_place,
     total_verses: c.verses_count,
-  });
+  }));
 });
+
 
 export const getSurahAyahs = cache(async (surahId: number): Promise<Ayah[]> => {
   const [araRes, engRes] = await Promise.all([
