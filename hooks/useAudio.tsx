@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
-import { Ayah } from './lib/types';
+import { Ayah } from '@/lib/types';
 
 interface AudioContextType {
   currentAyah: Ayah | null;
