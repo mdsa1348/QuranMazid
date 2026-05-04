@@ -11,22 +11,24 @@ interface SurahHeaderProps {
 const SurahHeader = ({ surah, surahId }: SurahHeaderProps) => {
   const isMeccan = surah?.type?.toLowerCase() === 'meccan';
   
-  // Use more robust URLs for the silhouettes
+  // Exact URLs provided by the user for pinpoint accuracy
   const headerImg = isMeccan 
-    ? "https://quranmazid.com/assets/images/makkah.png" 
-    : "https://quranmazid.com/assets/images/madinah.png";
+    ? "https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmakkah.a06c3e3e.png&w=828&q=75" 
+    : "https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmadinah.d27df76f.png&w=750&q=75";
 
   const bismillahSvg = "https://quranmazid.com/_next/static/media/bismillah.2a2f3d14.svg";
+
 
   return (
     <div className="relative h-[150px] flex items-center px-12 border-b border-border/10 bg-[#0a0a0a] overflow-hidden">
       {/* Left: Revelation Image */}
       <div className="flex-1 flex items-center h-full">
-        <div className="opacity-[0.08] transform scale-125 origin-left pointer-events-none">
+        <div className="opacity-[0.12] transform scale-125 origin-left pointer-events-none grayscale brightness-[2]">
            <img 
               src={headerImg} 
               alt="" 
-              className="h-28 object-contain invert"
+              className="h-28 object-contain"
+
               onError={(e) => {
                 // Fallback if the URL fails
                 (e.target as HTMLImageElement).src = isMeccan 
